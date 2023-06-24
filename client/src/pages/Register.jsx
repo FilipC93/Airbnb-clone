@@ -15,7 +15,7 @@ const Register = () => {
             });
             alert('Registration successful.');
         } catch (e) {
-            alert('Registration failed');
+            alert('Registration failed, try again later');
         }
     }
 
