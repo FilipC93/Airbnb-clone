@@ -1,3 +1,5 @@
+//!npm run dev to run the client dir
+//!node index.js to run api dir
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -10,7 +12,6 @@ const app = express();
 
 const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = 'asfaswqepigtjqweptgwegtw';
-
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
@@ -34,7 +35,7 @@ app.post('/register', async (req, res) => {
         });
         res.json(userDoc);
     } catch (e) {
-        res.status(422).json(e)
+        res.status(422).json(e);
     }
 });
 
@@ -46,7 +47,7 @@ app.post('/login', async (req, res) => {
         if (passOk) {
             jwt.sign({
                 email: userDoc.email,
-                id: userDoc._id,
+                id: userDoc._id
             }, jwtSecret, {}, (err, token) => {
                 if (err) throw err;
                 res.cookie('token', token).json('password ok');
@@ -70,6 +71,10 @@ app.get('/profile', (req, res) => {
     } else {
         res.json(null);
     }
-})
+});
+
+app.post('/logout', (req, res) => {
+    res.cookie('token', '').json(true);
+});
 
 app.listen(4000);
