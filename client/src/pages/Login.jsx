@@ -30,12 +30,14 @@ const Login = () => {
                 <h1 className="text-4xl text-center mb-4">Login</h1>
                 <form className="max-w-md mx-auto" onSubmit={handleLogin}>
                     <input
+                        className="text-center"
                         type="email"
                         placeholder="your@email.com"
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                     />
                     <input
+                        className="text-center"
                         type="password"
                         placeholder="password"
                         value={password}

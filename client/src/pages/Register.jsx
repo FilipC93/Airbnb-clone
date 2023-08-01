@@ -25,18 +25,21 @@ const Register = () => {
                 <h1 className="text-4xl text-center mb-4">Register</h1>
                 <form className="max-w-md mx-auto" onSubmit={registerUser}>
                     <input
+                        className="text-center"
                         type="text"
                         placeholder="John Doe"
                         value={name}
                         onChange={e => setName(e.target.value)}
                     />
                     <input
+                        className="text-center"
                         type="email"
                         placeholder="your@email.com"
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                     />
                     <input
+                        className="text-center"
                         type="password"
                         placeholder="password"
                         value={password}
