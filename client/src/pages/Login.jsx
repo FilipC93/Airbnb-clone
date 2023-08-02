@@ -8,7 +8,8 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [redirect, setRedirect] = useState(false);
     const { setUser } = useContext(UserContext);
-    const handleLogin = async (e) => {
+
+    const handleLogin = async e => {
         e.preventDefault();
         try {
             const { data } = await axios.post('/login', { email, password });
