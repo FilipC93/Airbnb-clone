@@ -78,9 +78,9 @@ const PlacesPage = () => {
                             </button>
                         </div>
                         <div className="mt-2 grid gap-2 grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-                            {addedPhotos.length > 0 && addedPhotos.map(link => (
-                                <div>
-                                    <img src={`http:localhost:400/uploads/${link}`} alt="Place Image" />
+                            {addedPhotos.length > 0 && addedPhotos.map((link, i) => (
+                                <div key={i}>
+                                    <img src={`http://localhost:4000/uploads/${link}`} alt="Place Image" />
                                 </div>
                             ))}
                             <button className="flex justify-center gap-1 border bg-transparent rounded-2xl p-8 text-2xl text-gray-600">

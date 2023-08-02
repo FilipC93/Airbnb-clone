@@ -5,6 +5,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const path = require('path');
 const UserModel = require('./models/User');
 const cookieParser = require('cookie-parser');
 const imageDownloader = require('image-downloader');
@@ -83,9 +84,10 @@ app.post('/logout', (req, res) => {
 app.post('/upload-by-link', async (req, res) => {
     const { link } = req.body;
     const newName = 'photo' + Date.now() + '.jpg';
+    const destPath = path.join(__dirname, 'uploads', newName);
     await imageDownloader.image({
         url: link,
-        dest: `${__dirname}/uploads${newName}`
+        dest: destPath
     });
     res.json(newName);
 });
