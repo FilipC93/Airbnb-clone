@@ -24,7 +24,7 @@ const PlacesPage = () => {
             </div>
             <div>
                 {places.length > 0 && places.map((place, index) => (
-                    <Link key={index} to={`/account/places/${place._id}`} className="flex cursor-pointer gap-4 bg-gray-200 p-4 rounded-2xl">
+                    <Link key={index} to={`/account/places/${place._id}`} className="flex cursor-pointer gap-4 bg-gray-200 p-4 rounded-2xl mt-1 mb-1">
                         <div className="flex w-32 h-32 bg-gray-300 shrink-0">
                             {place.photos.length > 0 && (
                                 <img className="object-cover" src={`http://localhost:4000/uploads/${place.photos[0]}`} alt="photo" />
