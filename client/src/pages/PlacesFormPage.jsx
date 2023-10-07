@@ -16,6 +16,7 @@ const PlacesFormPage = () => {
     const [checkIn, setCheckIn] = useState('');
     const [checkOut, setCheckOut] = useState('');
     const [maxGuests, setMaxGuests] = useState(1);
+    const [price, setPrice] = useState(20);
     const [redirect, setRedirect] = useState(false);
 
     useEffect(() => {
@@ -28,7 +29,7 @@ const PlacesFormPage = () => {
                 const {
                     title, address, photos,
                     description, perks, extraInfo,
-                    checkIn, checkOut, maxGuests
+                    checkIn, checkOut, maxGuests,price
                 } = data;
                 setTitle(title);
                 setAddress(address);
@@ -39,6 +40,7 @@ const PlacesFormPage = () => {
                 setCheckIn(checkIn);
                 setCheckOut(checkOut);
                 setMaxGuests(maxGuests);
+                setPrice(price);
             });;
         }
     }, [id])
@@ -63,11 +65,12 @@ const PlacesFormPage = () => {
         const placeData = {
             title, address, addedPhotos,
             description, perks, extraInfo,
-            checkIn, checkOut, maxGuests
+            checkIn, checkOut, maxGuests,
+            price
         };
 
-        if (id) await axios.put('/places', { id, ...placeData });
-        else await axios.post('/places', placeData);
+        if (id) await axios.put('/user-places', { id, ...placeData });
+        else await axios.post('/user-places', placeData);
         setRedirect(true);
     }
 
@@ -102,7 +105,7 @@ const PlacesFormPage = () => {
                 {preInput('Extra information', 'House rules, etc.')}
                 <textarea value={extraInfo} onChange={e => setExtraInfo(e.target.value)} />
                 {preInput('Check in & out times', 'Add your own check in & check out time, reminder to have an additional time window.')}
-                <div className="grid gap-2 sm:grid-cols-3">
+                <div className="grid gap-2 grid-cols-2 md:grid-cols-4">
                     <div>
                         <h3 className="mt-2 -mb-1">Check in</h3>
                         <input
@@ -127,6 +130,14 @@ const PlacesFormPage = () => {
                             type="number"
                             value={maxGuests}
                             onChange={e => setMaxGuests(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <h3 className="mt-2 -mb-1">Price per night:</h3>
+                        <input
+                            type="number"
+                            value={price}
+                            onChange={e => setPrice(e.target.value)}
                         />
                     </div>
                 </div>
