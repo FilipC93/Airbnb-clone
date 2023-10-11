@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { PhotosButtonIcon } from "../assets/constant-svg";
+import { CloseIcon, PhotosButtonIcon, PinIcon } from "../assets/constant-svg";
 
 const SinglePlacePage = () => {
     const { id } = useParams();
@@ -17,29 +17,40 @@ const SinglePlacePage = () => {
 
     if (showAllPhotos) {
         return (
-            <div className="absolute bg-white min-w-full min-h-screen">
-                {place?.photos?.length > 0 && place.photos.map((photo, index) => (
-                    <div key={index}>
-                        <img
-                            src={`http://localhost:4000/uploads/${photo}`}
-                            alt="shown photos"
-                        />
+            <div className="absolute inset-0 bg-black text-white min-h-screen">
+                <div className="bg-black p-8 grid gap-4">
+                    <div>
+                        <h2 className="text-3xl">Photos of {place.title}</h2>
+                        <button
+                            onClick={() => setShowAllPhotos(false)}
+                            className="fixed right-12 top-8 flex gap-1 py-2 px-4 rounded-2xl bg-white text-black shadow shadow-black"
+                        >
+                            <CloseIcon />Close photos
+                        </button>
                     </div>
-                ))}
+                    {place?.photos?.length > 0 && place.photos.map((photo, index) => (
+                        <div key={index}>
+                            <img
+                                src={`http://localhost:4000/uploads/${photo}`}
+                                alt="shown photos"
+                            />
+                        </div>
+                    ))}
+                </div>
             </div>
         )
     }
-
+    console.log(place)
     return (
         <div className="bg-gray-100 mt-4 -mx-8 px-8 py-8">
             <h1 className="text-3xl">{place.title}</h1>
             <a href={`https://maps.google.com/?q=${place.address}`}
                 target="_blank"
-                className="block underline font-semibold my-4 w-20">
-                {place.address}
+                className="flex gap-1 underline font-semibold my-4">
+                <PinIcon />{place.address}
             </a>
             <div className="relative">
-                <div className="grid gap-2 grid-cols-[2fr_1fr]">
+                <div className="grid gap-2 grid-cols-[2fr_1fr] rounded-3xl overflow-hidden">
                     <div>
                         {place.photos?.[0] && (
                             <div>
@@ -76,6 +87,21 @@ const SinglePlacePage = () => {
                 >
                     <PhotosButtonIcon /> Show more photos
                 </button>
+            </div>
+            <div className="my-4">
+                <h2 className="font-semibold text-2xl">
+                    Description
+                </h2>
+                {place.description}
+            </div>
+            <div className="grid grid-cols-2">
+                <div>
+                    <b>Check-in</b> at {place.checkIn}:00<br />
+                    <b>Check-out</b> at {place.checkOut}:00<br />
+                    <b>Max Guests: {place.maxGuests}</b>
+                </div>
+                <div>
+                </div>
             </div>
         </div>
     );
