@@ -5,6 +5,7 @@ const bookingSchema = new mongoose.Schema({
     checkOut: { type: Date, required: true },
     fullName: { type: String, required: true },
     mobile: { type: String, required: true },
+    guestNumber: {type: Number, required: true},
     price: Number
 });
 

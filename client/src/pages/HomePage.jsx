@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 
 const HomePage = () => {
     const [places, setPlaces] = useState([]);
-    console.log(places);
+
     useEffect(() => {
         axios.get('/places').then(resp => {
             setPlaces(resp.data);
         });
-    }, [])
-    console.log(places)
+    }, []);
+
     return (
         <div className="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 gap-y-8">
             {places.length > 0 && places.map(place => (
