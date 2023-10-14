@@ -191,11 +191,7 @@ app.post('/bookings', async (req, res) => {
         place, checkIn,
         checkOut, guestNumber,
         fullName, mobile, price
-    }).then(doc => {
-        res.json(doc);
-    }).catch(err => {
-        throw err
-    });
+    }).then(doc => res.json(doc)).catch(err => { throw err })
 });
 
 app.listen(4000);
