@@ -7,6 +7,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const path = require('path');
 const UserModel = require('./models/User');
+const BookingModel = require('./models/Booking');
 const Place = require('./models/Place');
 const cookieParser = require('cookie-parser');
 const imageDownloader = require('image-downloader');
@@ -114,7 +115,7 @@ app.post('/user-places', (req, res) => {
     const {
         title, address, addedPhotos,
         description, perks, extraInfo,
-        checkIn, checkOut, maxGuests,price
+        checkIn, checkOut, maxGuests, price
     } = req.body;
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
         if (err) throw err;
@@ -153,7 +154,7 @@ app.put('/user-places', async (req, res) => {
     const {
         id, title, address, addedPhotos,
         description, perks, extraInfo,
-        checkIn, checkOut, maxGuests,price
+        checkIn, checkOut, maxGuests, price
     } = req.body;
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
         const placeDoc = await Place.findById(id);
@@ -178,6 +179,23 @@ app.put('/user-places', async (req, res) => {
 
 app.get('/places', async (req, res) => {
     res.json(await Place.find());
+});
+
+app.post('/bookings', async (req, res) => {
+    const {
+        place, checkIn,
+        checkOut, guestNumber,
+        fullName, mobile, price
+    } = req.body;
+    BookingModel.create({
+        place, checkIn,
+        checkOut, guestNumber,
+        fullName, mobile, price
+    }).then(doc => {
+        res.json(doc);
+    }).catch(err => {
+        throw err
+    });
 });
 
 app.listen(4000);
