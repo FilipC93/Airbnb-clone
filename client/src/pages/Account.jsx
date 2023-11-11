@@ -4,6 +4,7 @@ import { Navigate, useParams } from "react-router-dom";
 import axios from "axios";
 import PlacesPage from "./PlacesPage";
 import AccountNav from "../components/AccountNav";
+import { Helmet } from "react-helmet";
 
 const AccountPage = () => {
     const [redirect, setRedirect] = useState(null);
@@ -24,16 +25,18 @@ const AccountPage = () => {
 
     return (
         <div>
-        <AccountNav />
+            <Helmet>
+                <title>{user && user?.name && user?.name}</title>
+                <meta name="ProfilePage" content="Page" />
+            </Helmet>
+            <AccountNav />
             {subpage === 'profile' && (
                 <div className="text-center max-w-lg mx-auto">
                     Logged in as {user?.name} ({user?.email})<br />
                     <button onClick={logout} className="primary max-w-sm mt-2">Logout</button>
                 </div>
             )}
-            {subpage === 'places' && (
-                <PlacesPage />
-            )}
+            {subpage === 'places' && <PlacesPage />}
         </div>
     );
 }

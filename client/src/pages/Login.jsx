@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext, useState } from "react"
 import { Link, Navigate } from "react-router-dom"
 import { UserContext } from "../../UserContext";
+import { Helmet } from "react-helmet";
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -27,6 +28,10 @@ const Login = () => {
 
     return (
         <div className="mt-4 grow flex items-center justify-around">
+            <Helmet>
+                <title>Login</title>
+                <meta name="LoginPage" content="Login" />
+            </Helmet>
             <div className="mb-64">
                 <h1 className="text-4xl text-center mb-4">Login</h1>
                 <form className="max-w-md mx-auto" onSubmit={handleLogin}>

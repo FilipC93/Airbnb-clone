@@ -41,7 +41,7 @@ const PlacesFormPage = () => {
                 setCheckOut(checkOut);
                 setMaxGuests(maxGuests);
                 setPrice(price);
-            });;
+            });
         }
     }, [id])
 
