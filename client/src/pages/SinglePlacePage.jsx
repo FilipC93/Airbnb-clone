@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { PinIcon } from "../assets/constant-svg";
 import PricingSection from "../components/PricingSection";
 import PlaceGallery from "../components/PlaceGallery";
 import AddressLink from "../components/AddressLink";

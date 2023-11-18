@@ -3,15 +3,11 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import AddressLink from "../components/AddressLink";
 import PlaceGallery from "../components/PlaceGallery";
-import { CalendarIcon } from "../assets/constant-svg";
-import { format } from "date-fns";
 import CalendarCalc from "../components/CalendarCalc";
 
 const SingleBooking = () => {
     const { id } = useParams();
     const [singleBooking, setSingleBooking] = useState();
-
-    console.log(singleBooking);
 
     useEffect(() => {
         id && axios.get('/bookings').then(resp => {
@@ -20,9 +16,8 @@ const SingleBooking = () => {
         })
     }, [id]);
 
-    if (!singleBooking) {
-        return '';
-    }
+    if (!singleBooking) return  '';
+
 
     return (
         <div className="my-8">
